@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    //把所有的name属性值放到一个数组中
+    let obj = {
+        a: {
+            name: "我是a",
+            age: 5,
+            b: {
+                name: "我是a中的b",
+                age: 2,
+                c: {
+                    name: "我是a中的c",
+                    sex: 0,
+                    b: {
+                        name: "我是a中的d"
+                    }
+                }
+            }
+        },
+        b: {
+            c: {
+                d: {
+                    name: "我是b中的d",
+                    age: 10
+                }
+            }
+        }
+    };
+    let obj2 =JSON.parse(JSON.stringify(obj));
+    let arr =[];
+   function getName(obj) {
+//       使用递归需要我们做边界判断处理
+//       对于这个需求来说 只要看传进来的参数是否是一个对象即可，不是对象 我们直接return
+//       是对象就接着执行函数即可
+
+       for (let k in obj) {
+           if(typeof  obj!=='object')return;
+           if(k==='name'){
+                arr.push(obj[k]);
+            }else{
+               getName(obj[k])
+           }
+       }
+   }
+   getName(obj2);
+    console.log(arr);
+    //   ary--->[‘我是a’，'我是a2' '我是a3']
+</script>
